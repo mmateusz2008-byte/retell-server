@@ -3,59 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twój Agent AI</title>
+<title>Agent AI</title>
 <style>
-    /* Reset i body */
-    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif;}
-    body {background: #f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh;}
+    /* Reset */
+    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
 
-    /* Kontener strony */
-    .page-container {
-        text-align: center;
-        padding: 20px;
-        max-width: 800px;
-        width: 90%;
+    body {background: #f0f2f5;}
+
+    /* Przycisk czatu w rogu */
+    #chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #4a90e2;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
     }
 
-    h1 {
-        color: #4a90e2;
-        margin-bottom: 20px;
-    }
-
-    p {
-        margin-bottom: 30px;
-        color: #555;
-    }
-
-    /* Styl dla embed czatu */
-    .chat-wrapper {
-        width: 100%;
+    /* Kontener czatu */
+    #chat-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        max-width: 90%;
         height: 500px;
-        max-width: 400px;
-        margin: 0 auto;
         border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        display: none;
+        z-index: 9998;
     }
 </style>
 </head>
 <body>
 
-<div class="page-container">
-    <h1>Twój Agent AI</h1>
-    <p>Rozmawiaj ze swoim agentem AI poniżej:</p>
+<!-- Przycisk otwierania czatu -->
+<button id="chat-button">💬</button>
 
-    <!-- Kontener na czat -->
-    <div class="chat-wrapper" id="retellai-chat"></div>
-</div>
+<!-- Kontener na embed czatu -->
+<div id="chat-container"></div>
 
 <!-- Embed Retellai -->
 <script src="https://app.retellai.com/embed.js"
     data-agent-id="agent_11e98e593e628f5edaecbabc4d"
     data-public-key="public_key_203f17a7837e0b33a4816"
-    data-container-id="retellai-chat"
+    data-container-id="chat-container"
     data-height="100%"
     data-width="100%">
+</script>
+
+<script>
+    const chatButton = document.getElementById('chat-button');
+    const chatContainer = document.getElementById('chat-container');
+
+    chatButton.addEventListener('click', () => {
+        if(chatContainer.style.display === 'none') {
+            chatContainer.style.display = 'block';
+        } else {
+            chatContainer.style.display = 'none';
+        }
+    });
 </script>
 
 </body>
