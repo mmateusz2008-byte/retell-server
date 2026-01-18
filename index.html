@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,9 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent AI</title>
 <style>
-    /* Reset */
     * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
-
     body {background: #f0f2f5;}
 
     /* Przycisk czatu w rogu */
@@ -48,13 +47,10 @@
 </head>
 <body>
 
-<!-- Przycisk otwierania czatu -->
 <button id="chat-button">💬</button>
-
-<!-- Kontener na embed czatu -->
 <div id="chat-container"></div>
 
-<!-- Embed Retellai -->
+<!-- Embed Retellai (oficjalny i działający) -->
 <script src="https://app.retellai.com/embed.js"
     data-agent-id="agent_11e98e593e628f5edaecbabc4d"
     data-public-key="public_key_203f17a7837e0b33a4816"
@@ -68,11 +64,7 @@
     const chatContainer = document.getElementById('chat-container');
 
     chatButton.addEventListener('click', () => {
-        if(chatContainer.style.display === 'none') {
-            chatContainer.style.display = 'block';
-        } else {
-            chatContainer.style.display = 'none';
-        }
+        chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
     });
 </script>
 
