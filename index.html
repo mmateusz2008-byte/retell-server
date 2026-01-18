@@ -5,149 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twój Agent AI</title>
 <style>
-    /* Reset */
+    /* Reset i body */
     * {margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif;}
-    body {background: #f0f2f5; color: #333; display:flex; justify-content:center; align-items:center; height:100vh;}
+    body {background: #f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh;}
 
-    /* Kontener czatu */
-    #chat-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 350px;
-        max-width: 90%;
-        height: 500px;
-        background: #fff;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        font-size: 14px;
-    }
-
-    /* Nagłówek czatu */
-    #chat-header {
-        background: #4a90e2;
-        color: #fff;
-        padding: 15px;
+    /* Kontener strony */
+    .page-container {
         text-align: center;
-        font-weight: bold;
-        font-size: 16px;
+        padding: 20px;
+        max-width: 800px;
+        width: 90%;
     }
 
-    /* Okno wiadomości */
-    #chat-messages {
-        flex: 1;
-        padding: 15px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        background: #f9f9f9;
+    h1 {
+        color: #4a90e2;
+        margin-bottom: 20px;
     }
 
-    /* Wiadomości użytkownika */
-    .message.user {
-        align-self: flex-end;
-        background: #4a90e2;
-        color: #fff;
-        padding: 10px 15px;
-        border-radius: 15px 15px 0 15px;
-        max-width: 80%;
-        word-wrap: break-word;
+    p {
+        margin-bottom: 30px;
+        color: #555;
     }
 
-    /* Wiadomości agenta */
-    .message.agent {
-        align-self: flex-start;
-        background: #e1e1e1;
-        color: #333;
-        padding: 10px 15px;
-        border-radius: 15px 15px 15px 0;
-        max-width: 80%;
-        word-wrap: break-word;
-    }
-
-    /* Input i przycisk */
-    #chat-input-container {
-        display: flex;
-        padding: 10px;
-        background: #f0f0f0;
-        gap: 10px;
-    }
-    #chat-input {
-        flex: 1;
-        padding: 10px 15px;
+    /* Styl dla embed czatu */
+    .chat-wrapper {
+        width: 100%;
+        height: 500px;
+        max-width: 400px;
+        margin: 0 auto;
         border-radius: 20px;
-        border: 1px solid #ccc;
-        outline: none;
-    }
-    #chat-send {
-        background: #4a90e2;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-    #chat-send:hover {
-        background: #357ab8;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
 </style>
 </head>
 <body>
 
-<div id="chat-container">
-    <div id="chat-header">Twój Agent AI</div>
-    <div id="chat-messages"></div>
-    <div id="chat-input-container">
-        <input type="text" id="chat-input" placeholder="Napisz wiadomość..." />
-        <button id="chat-send">Wyślij</button>
-    </div>
+<div class="page-container">
+    <h1>Twój Agent AI</h1>
+    <p>Rozmawiaj ze swoim agentem AI poniżej:</p>
+
+    <!-- Kontener na czat -->
+    <div class="chat-wrapper" id="retellai-chat"></div>
 </div>
 
-<script>
-    const messagesContainer = document.getElementById('chat-messages');
-    const inputField = document.getElementById('chat-input');
-    const sendButton = document.getElementById('chat-send');
-
-    // Funkcja do dodawania wiadomości do okna czatu
-    function addMessage(content, sender) {
-        const msg = document.createElement('div');
-        msg.classList.add('message', sender);
-        msg.textContent = content;
-        messagesContainer.appendChild(msg);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    // Obsługa wysyłania wiadomości
-    async function sendMessage() {
-        const text = inputField.value.trim();
-        if (!text) return;
-        addMessage(text, 'user');
-        inputField.value = '';
-
-        try {
-            const response = await fetch('https://api.retellai.com/v1/agents/agent_11e98e593e628f5edaecbabc4d/respond', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-public-key': 'public_key_203f17a7837e0b33a4816'
-                },
-                body: JSON.stringify({ message: text })
-            });
-            const data = await response.json();
-            addMessage(data.reply || "Agent nie odpowiedział :(", 'agent');
-        } catch (error) {
-            console.error(error);
-            addMessage("Błąd połączenia z agentem.", 'agent');
-        }
-    }
-
-    sendButton.addEventListener('click', sendMessage);
-    inputField.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendMessage(); });
+<!-- Embed Retellai -->
+<script src="https://app.retellai.com/embed.js"
+    data-agent-id="agent_11e98e593e628f5edaecbabc4d"
+    data-public-key="public_key_203f17a7837e0b33a4816"
+    data-container-id="retellai-chat"
+    data-height="100%"
+    data-width="100%">
 </script>
 
 </body>
