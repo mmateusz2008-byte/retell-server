@@ -50,13 +50,35 @@
 <button id="chat-button">💬</button>
 <div id="chat-container"></div>
 
-<!-- Embed Retellai (oficjalny i działający) -->
-<script src="https://app.retellai.com/embed.js"
-    data-agent-id="agent_11e98e593e628f5edaecbabc4d"
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strona z agentem AI</title>
+
+<!-- RETELL Chat Widget (oficjalny) -->
+<script
+    id="retell-widget"
+    src="https://dashboard.retellai.com/retell-widget.js"
+    type="module"
     data-public-key="public_key_203f17a7837e0b33a4816"
-    data-container-id="chat-container"
-    data-height="100%"
-    data-width="100%">
+    data-agent-id="agent_11e98e593e628f5edaecbabc4d"
+    data-agent-version="0"
+    data-title="Pogadaj z naszym AI"
+    data-show-ai-popup="true"
+    data-popup-message="Cześć! Jak mogę pomóc?"
+    data-auto-open="false">
+</script>
+
+</head>
+<body>
+
+<h1>Witaj na stronie</h1>
+<p>Twój agent AI jest gotowy do rozmowy 👇</p>
+
+</body>
+</html>
 </script>
 
 <script>
